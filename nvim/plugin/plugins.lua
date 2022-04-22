@@ -1,4 +1,8 @@
-require('packer').startup(function()
+function get_setup(name)
+  return string.format('require("plugin/config/%s")', name)
+end
+
+require('packer').startup(function(use)
 
   use 'wbthomason/packer.nvim' -- Package manager
   use "neovim/nvim-lspconfig" -- Collection of configurations for the built-in LSP client
@@ -16,6 +20,18 @@ require('packer').startup(function()
   use 'kristijanhusak/defx-git'
   use 'hoob3rt/lualine.nvim'
   use 'kristijanhusak/defx-icons'
-  use { 'Shougo/defx.nvim', run = ':UpdateRemotePlugins' }
+  use { 
+    'Shougo/defx.nvim',
+    run = ':UpdateRemotePlugins',
+    config = get_setup("defx")
+  }
   use 'folke/lsp-colors.nvim'
-end)
+  -- use {
+  --   'kyazdani42/nvim-tree.lua',
+  --   requires = {
+  --     'kyazdani42/nvim-web-devicons',
+  --   },
+  --   config = get_setup("nvim-tree"),
+  -- }
+end
+)

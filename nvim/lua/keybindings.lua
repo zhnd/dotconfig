@@ -1,2 +1,4 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+local map = require("utils").map
+
+map("n", ",<Space>", ":nohlsearch<CR>", { silent = true })
+
