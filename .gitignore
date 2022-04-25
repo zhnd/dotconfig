@@ -1,4 +1,6 @@
 .DS_Store
 packer_compiled.lua
-clash/
-iterm2/
+clash
+iterm2
+configstore
+raycast

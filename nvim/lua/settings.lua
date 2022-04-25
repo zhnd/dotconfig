@@ -4,7 +4,7 @@ local cmd = vim.cmd
 
 local default_options = {
   fileencodings = "utf-8",
-  encoding="utf-8",
+  encoding = "utf-8",
   hlsearch = true,
   title = true,
   expandtab = true,

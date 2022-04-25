@@ -1,4 +1,4 @@
+require('plugin').setup()
+require('lsp').setup()
 require('settings')
-require('lsp/installer_setup')
-require('lsp/config')
 require('keybindings')
