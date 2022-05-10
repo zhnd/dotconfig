@@ -32,10 +32,17 @@ function M.setup()
     use 'williamboman/nvim-lsp-installer'
     use "neovim/nvim-lspconfig"
     use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
-    use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
+    use {
+      'hrsh7th/cmp-nvim-lsp',
+      config = get_setup('cmp')
+    } -- LSP source for nvim-cmp
     use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
     use 'L3MON4D3/LuaSnip' -- Snippets plugin
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    use {
+      'nvim-treesitter/nvim-treesitter',
+      run = ':TSUpdate',
+      config = get_setup('treesitter')
+    }
     use "EdenEast/nightfox.nvim"
     use 'windwp/nvim-autopairs'
     use 'hoob3rt/lualine.nvim'
@@ -45,6 +52,7 @@ function M.setup()
       requires = {
         'kyazdani42/nvim-web-devicons',
       },
+      config = get_setup('nvim-tree')
     }
     use {
       'nvim-telescope/telescope.nvim',
