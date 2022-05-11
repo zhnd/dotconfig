@@ -43,7 +43,10 @@ function M.setup()
       run = ':TSUpdate',
       config = get_setup('treesitter')
     }
-    use 'windwp/nvim-autopairs'
+    use {
+      'windwp/nvim-autopairs',
+      config = get_setup('autopairs')
+    }
     use 'hoob3rt/lualine.nvim'
     use 'folke/lsp-colors.nvim'
     use {
