@@ -1,5 +1,5 @@
 local opt = vim.opt
-local globalOptions = vim.o
+local globalOptions = vim.g
 local cmd = vim.cmd
 
 local default_options = {
@@ -20,6 +20,7 @@ local default_options = {
 }
 
 local default_global_options = {
+  mapleader = ";",
   background = "dark",
   showcmd = true,
   cmdheight = 1,

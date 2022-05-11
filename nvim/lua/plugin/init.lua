@@ -32,11 +32,17 @@ function M.setup()
     use 'williamboman/nvim-lsp-installer'
     use "neovim/nvim-lspconfig"
     use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
-    use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
+    use {
+      'hrsh7th/cmp-nvim-lsp',
+      config = get_setup('cmp')
+    } -- LSP source for nvim-cmp
     use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
     use 'L3MON4D3/LuaSnip' -- Snippets plugin
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-    use "EdenEast/nightfox.nvim"
+    use {
+      'nvim-treesitter/nvim-treesitter',
+      run = ':TSUpdate',
+      config = get_setup('treesitter')
+    }
     use 'windwp/nvim-autopairs'
     use 'hoob3rt/lualine.nvim'
     use 'folke/lsp-colors.nvim'
@@ -45,11 +51,18 @@ function M.setup()
       requires = {
         'kyazdani42/nvim-web-devicons',
       },
+      config = get_setup('nvim-tree')
     }
+    use "nvim-lua/plenary.nvim"
     use {
       'nvim-telescope/telescope.nvim',
-      requires = { { 'nvim-lua/plenary.nvim' } }
     }
+    use {
+      "jose-elias-alvarez/null-ls.nvim",
+      config = get_setup('null-ls')
+    }
+
+
     if packer_bootstrap then
       print "Restart Neovim required after installation!"
       require("packer").sync()
