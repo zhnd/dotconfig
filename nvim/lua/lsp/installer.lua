@@ -1,26 +1,8 @@
 local lsp_installer = require "nvim-lsp-installer"
+local servers = require "lsp.servers"
 
 local M = {}
 
--- Include the servers you want to have installed by default below
-local servers = {
-  "cssls",
-  "dotls",
-  "eslint",
-  "emmet_ls",
-  "graphql",
-  "jsonls",
-  "quick_lint_js",
-  "tsserver",
-  "sumneko_lua",
-  "zeta_note",
-  "prismals",
-  "pyright",
-  "rust_analyzer",
-  "taplo",
-  "tailwindcss",
-  "yamlls",
-}
 
 lsp_installer.settings({
   ui = {

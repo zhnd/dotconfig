@@ -43,7 +43,6 @@ function M.setup()
       run = ':TSUpdate',
       config = get_setup('treesitter')
     }
-    use "EdenEast/nightfox.nvim"
     use 'windwp/nvim-autopairs'
     use 'hoob3rt/lualine.nvim'
     use 'folke/lsp-colors.nvim'
@@ -54,10 +53,16 @@ function M.setup()
       },
       config = get_setup('nvim-tree')
     }
+    use "nvim-lua/plenary.nvim"
     use {
       'nvim-telescope/telescope.nvim',
-      requires = { { 'nvim-lua/plenary.nvim' } }
     }
+    use {
+      "jose-elias-alvarez/null-ls.nvim",
+      config = get_setup('null-ls')
+    }
+
+
     if packer_bootstrap then
       print "Restart Neovim required after installation!"
       require("packer").sync()
