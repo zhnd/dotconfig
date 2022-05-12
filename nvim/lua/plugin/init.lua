@@ -26,16 +26,15 @@ function M.setup()
     cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
   end
 
-  -- Plugins
   local function plugins(use)
     use 'wbthomason/packer.nvim'
     use 'williamboman/nvim-lsp-installer'
     use "neovim/nvim-lspconfig"
-    use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
+    use 'hrsh7th/nvim-cmp'
     use {
       'hrsh7th/cmp-nvim-lsp',
       config = get_setup('cmp')
-    } -- LSP source for nvim-cmp
+    }
     use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
     use 'L3MON4D3/LuaSnip' -- Snippets plugin
     use {
@@ -65,6 +64,11 @@ function M.setup()
       config = get_setup('null-ls')
     }
 
+    use {
+      "akinsho/toggleterm.nvim",
+      branch = "main",
+      config = get_setup('terminal'),
+    }
 
     if packer_bootstrap then
       print "Restart Neovim required after installation!"

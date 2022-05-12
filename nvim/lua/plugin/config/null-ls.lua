@@ -20,7 +20,8 @@ nullls.setup({
     nullls.builtins.formatting.stylua,
     nullls.builtins.diagnostics.eslint,
     nullls.builtins.completion.spell,
-    nullls.builtins.formatting.prettier
+    nullls.builtins.formatting.prettier,
+    nullls.builtins.diagnostics.codespell
   },
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
