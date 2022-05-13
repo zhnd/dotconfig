@@ -4,14 +4,6 @@ local log = vim.log
 
 local M = {}
 
-function M.map(mode, lhs, rhs, opts)
-    local options = { noremap = true, silent = true }
-    if opts then
-        options = vim.tbl_extend("force", options, opts)
-    end
-    api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
 function M.t(str)
     return api.nvim_replace_termcodes(str, true, true, true)
 end

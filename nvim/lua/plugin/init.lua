@@ -58,6 +58,7 @@ function M.setup()
     use "nvim-lua/plenary.nvim"
     use {
       'nvim-telescope/telescope.nvim',
+      config = get_setup('telescope')
     }
     use {
       "jose-elias-alvarez/null-ls.nvim",
@@ -68,6 +69,11 @@ function M.setup()
       "akinsho/toggleterm.nvim",
       branch = "main",
       config = get_setup('terminal'),
+    }
+
+    use {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      run = "make",
     }
 
     if packer_bootstrap then
