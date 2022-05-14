@@ -24,6 +24,11 @@ local default_global_options = {
   background = "dark",
   showcmd = true,
   cmdheight = 1,
+  quickrun_config = {
+    _ = {
+      outputter = "message"
+    }
+  }
 }
 
 for k, v in pairs(default_options) do

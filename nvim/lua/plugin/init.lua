@@ -27,53 +27,57 @@ function M.setup()
   end
 
   local function plugins(use)
-    use 'wbthomason/packer.nvim'
-    use 'williamboman/nvim-lsp-installer'
+    use "wbthomason/packer.nvim"
+    use "williamboman/nvim-lsp-installer"
     use "neovim/nvim-lspconfig"
-    use 'hrsh7th/nvim-cmp'
+    use "hrsh7th/nvim-cmp"
     use {
-      'hrsh7th/cmp-nvim-lsp',
-      config = get_setup('cmp')
+      "hrsh7th/cmp-nvim-lsp",
+      config = get_setup("cmp")
     }
-    use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
-    use 'L3MON4D3/LuaSnip' -- Snippets plugin
+    use "saadparwaiz1/cmp_luasnip" -- Snippets source for nvim-cmp
+    use "L3MON4D3/LuaSnip" -- Snippets plugin
     use {
-      'nvim-treesitter/nvim-treesitter',
-      run = ':TSUpdate',
-      config = get_setup('treesitter')
+      "nvim-treesitter/nvim-treesitter",
+      run = ":TSUpdate",
+      config = get_setup("treesitter")
     }
     use {
-      'windwp/nvim-autopairs',
-      config = get_setup('autopairs')
+      "windwp/nvim-autopairs",
+      config = get_setup("autopairs")
     }
-    use 'hoob3rt/lualine.nvim'
-    use 'folke/lsp-colors.nvim'
+    use "hoob3rt/lualine.nvim"
+    use "folke/lsp-colors.nvim"
     use {
-      'kyazdani42/nvim-tree.lua',
+      "kyazdani42/nvim-tree.lua",
       requires = {
-        'kyazdani42/nvim-web-devicons',
+        "kyazdani42/nvim-web-devicons",
       },
-      config = get_setup('nvim-tree')
+      config = get_setup("nvim-tree")
     }
     use "nvim-lua/plenary.nvim"
     use {
-      'nvim-telescope/telescope.nvim',
-      config = get_setup('telescope')
+      "nvim-telescope/telescope.nvim",
+      config = get_setup("telescope")
     }
     use {
       "jose-elias-alvarez/null-ls.nvim",
-      config = get_setup('null-ls')
+      config = get_setup("null-ls")
     }
 
     use {
       "akinsho/toggleterm.nvim",
       branch = "main",
-      config = get_setup('terminal'),
+      config = get_setup("terminal"),
     }
 
     use {
       "nvim-telescope/telescope-fzf-native.nvim",
       run = "make",
+    }
+
+    use {
+      "thinca/vim-quickrun",
     }
 
     if packer_bootstrap then
