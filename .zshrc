@@ -1,3 +1,6 @@
+#pip3
+export PATH=$HOME/Library/Python/3.8/bin:$PATH
+
 # kitty
 alias d="kitty +kitten diff"
 
