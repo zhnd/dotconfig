@@ -112,6 +112,8 @@ function M.setup()
       config = get_setup('rust-tools')
     }
 
+    use "rizzatti/dash.vim"
+
     if packer_bootstrap then
       print "Restart Neovim required after installation!"
       require("packer").sync()
