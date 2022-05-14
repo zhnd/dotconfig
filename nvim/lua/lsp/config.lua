@@ -49,3 +49,4 @@ for _, server in pairs(servers) do
     settings = server.settings
   }
 end
+

@@ -33,10 +33,21 @@ function M.setup()
     use "hrsh7th/nvim-cmp"
     use {
       "hrsh7th/cmp-nvim-lsp",
+      requires = {
+        "L3MON4D3/LuaSnip",
+        "rafamadriz/friendly-snippets",
+      },
       config = get_setup("cmp")
     }
-    use "saadparwaiz1/cmp_luasnip" -- Snippets source for nvim-cmp
-    use "L3MON4D3/LuaSnip" -- Snippets plugin
+    use "saadparwaiz1/cmp_luasnip"
+    use { "L3MON4D3/LuaSnip",
+      config = function()
+        require("luasnip.loaders.from_lua").lazy_load()
+        require("luasnip.loaders.from_vscode").lazy_load {
+        }
+        require("luasnip.loaders.from_snipmate").lazy_load()
+      end,
+    }
     use {
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
@@ -86,6 +97,14 @@ function M.setup()
     use {
       'goolord/alpha-nvim',
       config = get_setup('alpha')
+    }
+
+    use "github/copilot.vim"
+
+    use {
+      "numToStr/Comment.nvim",
+      event = "BufRead",
+      config = get_setup('comment')
     }
 
     if packer_bootstrap then
