@@ -76,8 +76,16 @@ function M.setup()
       run = "make",
     }
 
+    use "thinca/vim-quickrun"
+    use "frenzyexists/aquarium-vim"
     use {
-      "thinca/vim-quickrun",
+      "ahmedkhalf/project.nvim",
+      config = get_setup("project")
+    }
+
+    use {
+      'goolord/alpha-nvim',
+      config = get_setup('alpha')
     }
 
     if packer_bootstrap then

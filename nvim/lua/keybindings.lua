@@ -32,6 +32,7 @@ local keymaps = {
     ["<leader>fb"] = "<cmd>lua require('telescope.builtin').buffers()<CR>",
     ["<leader>fh"] = "<cmd>lua require('telescope.builtin').help_tags()<CR>",
     ["<leader>g"] = "<cmd>lua _lazygit_toggle()<CR>",
+    ["<leader>r"] = ":QuickRun<CR>",
   },
 }
 function M.append_to_defaults(keymaps)

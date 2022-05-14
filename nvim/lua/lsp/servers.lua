@@ -18,7 +18,6 @@ local servers = {
   { "cssls" },
   { "dotls" },
   { "jsonls" },
-  { "quick_lint_js" },
   { "tsserver" },
   { "sumneko_lua",
     settings = {
