@@ -107,6 +107,11 @@ function M.setup()
       config = get_setup('comment')
     }
 
+    use {
+      "simrat39/rust-tools.nvim",
+      config = get_setup('rust-tools')
+    }
+
     if packer_bootstrap then
       print "Restart Neovim required after installation!"
       require("packer").sync()

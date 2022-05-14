@@ -1,7 +1,7 @@
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-local nullls = require("null-ls")
+local null_ls = require("null-ls")
 
-nullls.setup({
+null_ls.setup({
   cmd = { "nvim" },
   debounce = 250,
   debug = false,
@@ -17,11 +17,11 @@ nullls.setup({
   on_exit = nil,
   update_in_insert = false,
   sources = {
-    nullls.builtins.formatting.stylua,
-    nullls.builtins.diagnostics.eslint,
-    nullls.builtins.completion.spell,
-    nullls.builtins.formatting.prettier,
-    nullls.builtins.diagnostics.codespell
+    null_ls.builtins.formatting.stylua,
+    null_ls.builtins.diagnostics.eslint,
+    null_ls.builtins.completion.spell,
+    null_ls.builtins.formatting.prettier,
+    null_ls.builtins.diagnostics.codespell,
   },
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
