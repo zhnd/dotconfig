@@ -113,6 +113,8 @@ function M.setup()
     }
 
     use "rizzatti/dash.vim"
+    use "vim-test/vim-test"
+    use "hrsh7th/cmp-path"
 
     if packer_bootstrap then
       print "Restart Neovim required after installation!"
