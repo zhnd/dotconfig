@@ -116,6 +116,11 @@ function M.setup()
     use "vim-test/vim-test"
     use "hrsh7th/cmp-path"
 
+    use({
+      "iamcco/markdown-preview.nvim",
+      run = function() vim.fn["mkdp#util#install"]() end,
+    })
+
     if packer_bootstrap then
       print "Restart Neovim required after installation!"
       require("packer").sync()

@@ -28,7 +28,7 @@ local default_global_options = {
     _ = {
       outputter = "message"
     }
-  }
+  },
 }
 
 for k, v in pairs(default_options) do
