@@ -2,7 +2,7 @@
 
 为了练习 vim 编程方式，参考日常使用习惯，将自己的配置文件夹同步至此仓库，多设备同步，方便查看。
 
-基于自身技术栈以及学习内容，主要支持一下文件类型：
+基于自身技术栈以及学习内容，主要支持以下文件类型：
 
 - JavaScript
 - TypeScript
@@ -24,6 +24,7 @@
 - [lazygit](https://github.com/jesseduffield/lazygit)集成
 - 保存自动格式化
 - [packer](https://github.com/wbthomason/packer.nvim)插件管理
+- CSS Modules
 
 ## 使用指南
 
@@ -50,11 +51,12 @@
 - vscode-langservers-extracted
 - typescript
 - typescript-language-server
+- cssmodules-language-server
 
 一键安装：
 
 ```bash
-npm install -g emmet-ls vscode-langservers-extracted typescript typescript-language-server
+npm install -g emmet-ls vscode-langservers-extracted typescript typescript-language-server cssmodules-language-server
 ```
 
 如果你需要更新 Lua 配置文件，还需要安装

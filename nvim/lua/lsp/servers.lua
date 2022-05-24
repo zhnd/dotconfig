@@ -16,6 +16,7 @@ local servers = {
     }
   },
   { "cssls" },
+  { "cssmodules_ls" },
   { "dotls" },
   { "jsonls" },
   { "tsserver" },
