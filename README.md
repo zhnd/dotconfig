@@ -75,8 +75,88 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 ## 常用快捷键
 
-leader = `;`
+<details>
+<summary>基本操作</summary>
 
+<pre>
+  <kbd>u:</kbd>: 撤销
+  <kbd>r:</kbd>: 替换光标下的字符，不进入插入模式，例如rx，将光标下的字符替换为x
+  <kbd>ndd</kbd>: 删除从光标所在行开始，向下的n行
+  <kbd>x</kbd>: 每按一次，删除光标所在位置的“后面”一个字符。
+  <kbd>nx</kbd>:删除光标所在位置的“后面”n个字符
+  <kbd>X</kbd>: 每按一次，删除光标所在位置的“前面”一个字符
+  <kbd>nX</kbd>: 删除光标所在位置的“前面”n个字符
+  <kbd>:history</kbd>: 显示最近在vim里面输入的历史
+  <kbd>gcc</kbd>: 注释一行
+  <kbd><<</kbd>: 左移一行
+  <kbd>>></kbd>: 右移一行
+  <kbd>c?change</kbd>: (先删除再进入插入模式)
+  <kbd>d?delete</kbd>: 先删除
+  <kbd>p</kbd>: 从光标右边开始粘贴，注意不能粘贴到Vim外的程序中
+  <kbd>P</kbd>: 大P，从光标左边开始粘贴
+  <kbd>yy</kbd>: 复制一整行
+  <kbd>y$</kbd>:  复制从光标所在位置，到行尾的所有字符
+  <kbd>y0</kbd>: （复制从光标所在位置，到行首的所有字符
+  <kbd>~? </kbd>: 转换大小写
+  <kbd>gu</kbd>: 转为小写
+  <kbd>guiw</kbd>: 就是让一个单词变成小写
+  <kbd>gUiw</kbd>: 就是让一个单词变成大写
+  <kbd>>?</kbd>:shift right (右移)
+  <kbd><?</kbd>:shift left (左移)
+  <kbd>diw</kbd>: 删除一个单词，只删除单词本身，不会旁边的空格
+  <kbd>daw</kbd>: 删除一个单词，并删除旁边的一个空格
+  <kbd>viw</kbd>: 就表示选中一个单词
+  <kbd>yiw</kbd>: 表示复制一个单词
+</pre>
+</details>
+
+<details>
+<summary>动作命令</summary>
+
+<pre>
+  <kbd>f{char}find</kbd>: 行内搜索一个字符
+  <kbd>t{char}till</kbd>: 功能类型 f{chat}, 但是是在这个搜索到的字符前停下，意思是到这个字符之前，很常用的motion
+  <kbd>gg</kbd>:跳到行首
+  <kbd>G</kbd>:跳到行尾
+  <kbd>w</kbd>:移到下个单词的第一个字符
+  <kbd>b</kbd>:移到上个单词的第一个字符
+  <kbd>e</kbd>:移到单词最后一个字符
+  <kbd>ge</kbd>:上个单词的最后一个字符
+  <kbd>vaw “a word”</kbd>: 选择一整个单词，包括它边上的空格
+  <kbd>viw in word</kbd>: 选择一整个单词，不包括空格
+
+</pre>
+</details>
+
+<details>
+<summary>vim-surround</summary>
+
+<pre>
+   <kbd>ysiw"</kbd>: 单词周围加双引号
+   <kbd>ysiw(</kbd>: 单词周围加圆括号, 左括号是带空格的
+   <kbd>ysiw]</kbd>: 单词周围加方括号, 右括号不带空格
+   <kbd>ysiWb</kbd>: 以空格为分界加圆括号,这是不带空格的括号，大 B 代表不带空格的花括号
+   <kbd>ysfn</kbd>: 从光标位置到字母 n 加
+   <kbd>ystn</kbd>: 从光标位置到字母 n 前面加
+   <kbd>yss</kbd>: 整行前后加
+   <kbd>v</kbd>: 选中，S v 模式选中区域前后加
+   <kbd>cs'"</kbd>: 双引号改单引号,作用于整行
+   <kbd>ds"</kbd>: 删除双引号,作用于整行
+</pre>
+</details>
+
+<details>
+<summary>vim-easymotion</summary>
+
+<pre>
+  <kbd>leader leader s <char></kbd>全文查找字符
+  <kbd>leader leader w</kbd>查找当前光标后面的单词首字母
+  <kbd>leader leader b</kbd>查找当前光标前面的单词首字母
+</pre>
+
+</details>
+
+****
 ### normal mode
 
 #### 自定义
@@ -394,7 +474,7 @@ leader = `;`
 
 <details>
   <summary>neovim tree</summary>
-  
+
 <pre>
 <code>
 -- default mappings
