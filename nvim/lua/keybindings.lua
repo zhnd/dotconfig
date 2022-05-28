@@ -31,7 +31,7 @@ local keymaps = {
     ["<leader>fg"] = "<cmd>lua require('telescope.builtin').live_grep()<CR>",
     ["<leader>fb"] = "<cmd>lua require('telescope.builtin').buffers()<CR>",
     ["<leader>fh"] = "<cmd>lua require('telescope.builtin').help_tags()<CR>",
-    ["<leader>g"] = "<cmd>lua _lazygit_toggle()<CR>",
+    ["<leader>g"] = "<cmd>lua _gitui_toggle()<CR>",
     ["<leader>r"] = ":QuickRun<CR>",
     ["<leader>dd"] = ":Dash<CR>",
   },

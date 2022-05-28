@@ -20,8 +20,8 @@ export PATH=$HOME/develop/tools/nvim-osx64/bin:$PATH
 
 # proxy
 # export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890
-alias proxy='export all_proxy=socks5://127.0.0.1:7890'
-alias unproxy='unset all_proxy'
+# alias proxy='export all_proxy=socks5://127.0.0.1:7890'
+# alias unproxy='unset all_proxy'
 
 # nvm
 export NVM_DIR="$HOME/.nvm"

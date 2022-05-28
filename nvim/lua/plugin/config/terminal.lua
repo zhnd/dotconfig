@@ -14,7 +14,7 @@ require("toggleterm").setup({
   -- direction = 'vertical' | 'horizontal' | 'window' | 'float',
   direction = "float",
   close_on_exit = true, -- close the terminal window when the process exits
-  shell = vim.o.shell, -- change the default shell
+  shell = "fish", -- change the default shell
   -- This field is only relevant if direction is set to 'float'
   float_opts = {
     -- The border key is *almost* the same as 'nvim_win_open'
@@ -34,8 +34,8 @@ require("toggleterm").setup({
 })
 
 local Terminal = require('toggleterm.terminal').Terminal
-local lazygit  = Terminal:new({ cmd = "lazygit", hidden = true })
+local gitui    = Terminal:new({ cmd = "gitui", hidden = true })
 
-function _lazygit_toggle()
-  lazygit:toggle()
+function _gitui_toggle()
+  gitui:toggle()
 end
