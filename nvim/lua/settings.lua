@@ -17,6 +17,7 @@ local default_options = {
   linebreak = true,
   autoindent = true,
   termguicolors = true,
+  clipboard = 'unnamed'
 }
 
 local default_global_options = {
