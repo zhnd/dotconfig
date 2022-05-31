@@ -44,6 +44,7 @@ local servers = {
   { "rust_analyzer" },
   { "taplo" },
   { "yamlls" },
+  { "solc" },
 }
 
 return servers
