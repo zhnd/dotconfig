@@ -115,6 +115,11 @@ function M.setup()
     use "rizzatti/dash.vim"
     use "vim-test/vim-test"
     use "hrsh7th/cmp-path"
+    use {'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim',  config = get_setup('flutter-tools')}
+    use {"ur4ltz/surround.nvim",config = function()
+        require"surround".setup {mappings_style = "surround"}
+      end
+    }
 
     use({
       "iamcco/markdown-preview.nvim",
