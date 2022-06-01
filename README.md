@@ -107,6 +107,8 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
   <kbd>daw</kbd>: 删除一个单词，并删除旁边的一个空格
   <kbd>viw</kbd>: 就表示选中一个单词
   <kbd>yiw</kbd>: 表示复制一个单词
+  <kbd>:%s/源字符串/目的字符串/g:</kbd> 批量替换
+  <kbd>:%s/源字符串/目的字符串/gc</kbd> 单个替换
 </pre>
 </details>
 
