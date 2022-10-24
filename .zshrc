@@ -1,22 +1,32 @@
-#pip3
+# cmake
+PATH="/Applications/CMake.app/Contents/bin":"$PATH"
+
+# jsvu
+export PATH="${HOME}/.jsvu:${PATH}"
+
+# deno
+export DENO_INSTALL="/Users/zhued/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
+# pip3
 export PATH=$HOME/Library/Python/3.8/bin:$PATH
 
 # kitty
 alias d="kitty +kitten diff"
 
-#lazygit
-export PATH=$HOME/develop/tools/lazygit:$PATH
+# lazygit
+export PATH=$HOME/develop/lazygit:$PATH
 
 # lunarvim
 export PATH=$HOME/.local/bin:$PATH
 
 # neovim
-export PATH=$HOME/develop/tools/nvim-osx64/bin:$PATH
+export PATH=$HOME/develop/nvim-macos/bin:$PATH
 
 # autojump
-[[ -s /Users/zhudi/.autojump/etc/profile.d/autojump.sh ]] && source /Users/zhudi/.autojump/etc/profile.d/autojump.sh
+[[ -s /Users/zhued/.autojump/etc/profile.d/autojump.sh ]] && source /Users/zhued/.autojump/etc/profile.d/autojump.sh
 
-	autoload -U compinit && compinit -u
+autoload -U compinit && compinit -u
 
 # proxy
 # export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890

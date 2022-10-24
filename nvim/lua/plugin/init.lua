@@ -83,8 +83,11 @@ function M.setup()
     }
 
     use {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      run = "make",
+      'nvim-telescope/telescope-fzf-native.nvim',
+      run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+      requires = {
+        'junegunn/fzf.vim'
+      }
     }
 
     use "thinca/vim-quickrun"
@@ -115,9 +118,15 @@ function M.setup()
     use "rizzatti/dash.vim"
     use "vim-test/vim-test"
     use "hrsh7th/cmp-path"
-    use {'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim',  config = get_setup('flutter-tools')}
-    use {"ur4ltz/surround.nvim",config = function()
-        require"surround".setup {mappings_style = "surround"}
+    use {
+      "akinsho/flutter-tools.nvim",
+      requires = 'nvim-lua/plenary.nvim',
+      -- config = get_setup('flutter-tools')
+    }
+    use {
+      "ur4ltz/surround.nvim",
+      config = function()
+        require "surround".setup { mappings_style = "surround" }
       end
     }
 
@@ -125,6 +134,18 @@ function M.setup()
       "iamcco/markdown-preview.nvim",
       run = function() vim.fn["mkdp#util#install"]() end,
     })
+
+    use "dense-analysis/ale"
+
+    use {
+      'feline-nvim/feline.nvim',
+      config = get_setup('feline')
+    }
+
+    use {
+      'lewis6991/gitsigns.nvim',
+      config = get_setup('gitsigns')
+    }
 
     if packer_bootstrap then
       print "Restart Neovim required after installation!"

@@ -40,5 +40,4 @@ for k, v in pairs(default_global_options) do
   globalOptions[k] = v
 end
 
--- cmd("runtime colors/NeoSolarized.vim")
-cmd("colorscheme aquarium")
+cmd("runtime colors/NeoSolarized.vim")

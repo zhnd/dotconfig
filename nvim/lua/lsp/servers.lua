@@ -38,7 +38,6 @@ local servers = {
         },
       },
     }, },
-  { "zeta_note" },
   { "prismals" },
   { "pyright" },
   { "rust_analyzer" },
