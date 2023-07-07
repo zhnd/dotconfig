@@ -20,7 +20,7 @@ local servers = {
   { "dotls" },
   { "jsonls" },
   { "tsserver" },
-  { "sumneko_lua",
+  { "lua_ls",
     settings = {
       Lua = {
         runtime = {

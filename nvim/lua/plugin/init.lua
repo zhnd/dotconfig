@@ -81,13 +81,9 @@ function M.setup()
       branch = "main",
       config = get_setup("terminal"),
     }
-
     use {
       'nvim-telescope/telescope-fzf-native.nvim',
-      run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
-      requires = {
-        'junegunn/fzf.vim'
-      }
+      run = 'make'
     }
 
     use "thinca/vim-quickrun"
