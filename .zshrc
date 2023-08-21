@@ -1,3 +1,9 @@
+# lua
+export PATH=$HOME/develop/tools/lua-5.4.4/src:$PATH
+
+# z.lua
+eval "$(lua ~/develop/tools/z.lua/z.lua --init zsh)"
+
 # cmake
 PATH="/Applications/CMake.app/Contents/bin":"$PATH"
 
@@ -59,10 +65,11 @@ load-nvmrc() {
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
-ZSH_THEME="spaceship"
+# ZSH_THEME="spaceship"
 
 plugins=(
 	git
+  zsh-completions
 	zsh-autosuggestions
 	fast-syntax-highlighting
 )
@@ -74,3 +81,6 @@ export ZSH="$HOME/.oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# starship
+eval "$(starship init zsh)"
