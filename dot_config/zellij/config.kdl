@@ -6,10 +6,11 @@ pane_frames false
 // 滚动模式按 e 用 nvim 打开 scrollback
 scrollback_editor "/opt/homebrew/bin/nvim"
 
-// session 自动序列化：崩溃/重启后能 resurrect
+// session 自动序列化：仅保留 layout/tab 结构，不抓 pane 可见内容
+// 关闭 serialize_pane_viewport 来排除大 buffer / nvim 重绘下的性能拖累
 session_serialization true
-serialize_pane_viewport true
-scrollback_lines_to_serialize 10000
+serialize_pane_viewport false
+scrollback_lines_to_serialize 0
 serialization_interval 60
 
 keybinds clear-defaults=true {
