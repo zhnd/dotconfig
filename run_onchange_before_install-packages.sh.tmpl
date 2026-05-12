@@ -23,8 +23,8 @@ brew "chezmoi"
 brew "direnv"
 brew "eza"
 brew "fd"
-brew "fnm"
 brew "fzf"
+brew "mise"
 brew "gh"
 brew "git-delta"
 brew "lazygit"
@@ -66,8 +66,8 @@ sudo dnf install -y --skip-unavailable \
 if ! command -v chezmoi >/dev/null 2>&1; then
   sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
 fi
-if ! command -v fnm >/dev/null 2>&1; then
-  curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
+if ! command -v mise >/dev/null 2>&1; then
+  curl -fsSL https://mise.run | sh
 fi
 if ! command -v bw >/dev/null 2>&1; then
   echo "ℹ️  bitwarden-cli 需手动装：https://bitwarden.com/download/ 下 zip 解压到 /usr/local/bin"
