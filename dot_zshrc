@@ -33,10 +33,6 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LESS='-R -F -X -i'      # 颜色/短内容不分页/不清屏/搜索忽略大小写
 
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
-export PATH="$PATH":"$HOME/.pub-cache/bin"
-
 # proxy（可切换）
 proxy_on() {
   export ALL_PROXY=socks5://127.0.0.1:10800
@@ -83,12 +79,6 @@ zinit wait lucid for \
   OMZP::docker-compose \
   OMZP::npm \
   OMZP::rust
-
-# fnm (Node version manager)
-zinit wait lucid has'fnm' for \
-  id-as'fnm-env' \
-  atload'eval "$(fnm env --use-on-cd)"' \
-  zdharma-continuum/null
 
 # syntax-highlighting 放最后加载
 zinit wait lucid for zdharma-continuum/fast-syntax-highlighting

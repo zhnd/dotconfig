@@ -2,3 +2,16 @@
 alias mrt="git push origin \$(git rev-parse --abbrev-ref HEAD):mr/test/\$(git rev-parse --abbrev-ref HEAD)"
 alias mrm="git push origin \$(git rev-parse --abbrev-ref HEAD):mr/master/\$(git rev-parse --abbrev-ref HEAD)"
 alias mrp="git push origin \$(git rev-parse --abbrev-ref HEAD):mr/prerelease/\$(git rev-parse --abbrev-ref HEAD)"
+
+# Android SDK
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
+
+# Flutter pub cache
+export PATH="$PATH:$HOME/.pub-cache/bin"
+
+# fnm (Node version manager) —— 通过 zinit turbo 异步加载
+zinit wait lucid has'fnm' for \
+  id-as'fnm-env' \
+  atload'eval "$(fnm env --use-on-cd)"' \
+  zdharma-continuum/null
