@@ -1,5 +1,9 @@
 README.md
 LICENSE
+
+# 各机器各自维护（不同步）
+.config/nvim/lazy-lock.json
+
 {{- if ne .profile "work" }}
 .zshrc.work
 {{- end }}
