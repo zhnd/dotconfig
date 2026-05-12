@@ -1,0 +1,10 @@
+{{- /* 首次 chezmoi init 时提示用户填写，之后存进本机 ~/.config/chezmoi/chezmoi.toml */ -}}
+{{- $profile  := promptChoiceOnce . "profile"   "Machine profile" (list "personal" "work") -}}
+{{- $gitName  := promptStringOnce . "git.name"  "Git user.name" -}}
+{{- $gitEmail := promptStringOnce . "git.email" "Git user.email (留空则不设置全局)" "" -}}
+
+[data]
+  profile = {{ $profile | quote }}
+  [data.git]
+    name  = {{ $gitName | quote }}
+    email = {{ $gitEmail | quote }}

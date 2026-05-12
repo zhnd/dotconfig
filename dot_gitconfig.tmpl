@@ -1,0 +1,22 @@
+[user]
+	name = {{ .git.name | quote }}
+{{- if .git.email }}
+	email = {{ .git.email | quote }}
+{{- end }}
+[core]
+	editor = code --wait
+	ignorecase = false
+	excludesFile = ~/.gitignore_global
+	pager = delta
+[push]
+	forceWithLease = true
+[gitbutler]
+	aiOpenAIKeyOption = butlerAPI
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	side-by-side = true
+	line-numbers = true
+[merge]
+	conflictStyle = zdiff3

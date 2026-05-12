@@ -1,0 +1,168 @@
+# PATH 自动去重（必须放在所有 PATH 设置之前）
+typeset -U path PATH
+
+# history
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+setopt EXTENDED_HISTORY        # 记录命令时间戳
+setopt SHARE_HISTORY           # 多窗口实时共享历史
+setopt HIST_IGNORE_ALL_DUPS    # 重复命令只保留最新一条
+setopt HIST_IGNORE_SPACE       # 空格开头的命令不入库
+setopt HIST_REDUCE_BLANKS      # 压缩多余空白再存
+setopt HIST_VERIFY             # !! 展开后先确认
+
+# directory navigation
+setopt AUTO_CD                 # 直接敲目录名即 cd
+setopt AUTO_PUSHD              # 每次 cd 自动 pushd
+setopt PUSHD_IGNORE_DUPS       # pushd 栈去重
+setopt PUSHD_SILENT
+
+# interactive niceties
+setopt INTERACTIVE_COMMENTS    # 交互 shell 也支持 # 注释（粘多行脚本必备）
+setopt NO_FLOW_CONTROL         # 释放 Ctrl+S/Ctrl+Q，避免误冻结 terminal
+setopt NO_BEEP                 # 关提示音
+
+# Ctrl+W 按路径分段删，而不是一口气删整条
+WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
+
+# 基础环境变量
+export EDITOR='code --wait'
+export VISUAL=$EDITOR
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LESS='-R -F -X -i'      # 颜色/短内容不分页/不清屏/搜索忽略大小写
+
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+
+# proxy（可切换）
+proxy_on() {
+  export ALL_PROXY=socks5://127.0.0.1:10800
+  export HTTP_PROXY=http://127.0.0.1:10801
+  export HTTPS_PROXY=http://127.0.0.1:10801
+  export NO_PROXY=localhost,127.0.0.1,::1
+  echo "🟢 proxy on"
+}
+proxy_off() {
+  unset ALL_PROXY HTTP_PROXY HTTPS_PROXY NO_PROXY
+  echo "🔴 proxy off"
+}
+proxy_on > /dev/null
+
+export NEXT_PUBLIC_CTC_EDITOR=vscode
+
+alias mrt="git push origin \$(git rev-parse --abbrev-ref HEAD):mr/test/\$(git rev-parse --abbrev-ref HEAD)"
+alias mrm="git push origin \$(git rev-parse --abbrev-ref HEAD):mr/master/\$(git rev-parse --abbrev-ref HEAD)"
+alias mrp="git push origin \$(git rev-parse --abbrev-ref HEAD):mr/prerelease/\$(git rev-parse --abbrev-ref HEAD)"
+
+# zellij: 按"当前目录名"作为 session 名，已存在则 attach 回去
+zj() {
+  local name="${1:-$(basename "$PWD")}"
+  zellij attach -c "$name"
+}
+
+# autosuggestions 行为微调（必须在插件加载前 export）
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+
+# zinit
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d "$ZINIT_HOME" ] && mkdir -p "$(dirname $ZINIT_HOME)" && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# 异步加载插件
+zinit wait lucid for \
+  atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions \
+  blockf atpull'zinit creinstall -q .' atload"zicompinit -C; zicdreplay" \
+    zsh-users/zsh-completions \
+  Aloxaf/fzf-tab \
+  OMZL::git.zsh \
+  OMZP::git \
+  OMZP::docker \
+  OMZP::docker-compose \
+  OMZP::npm \
+  OMZP::rust
+
+# fnm (Node version manager)
+zinit wait lucid has'fnm' for \
+  id-as'fnm-env' \
+  atload'eval "$(fnm env --use-on-cd)"' \
+  zdharma-continuum/null
+
+# syntax-highlighting 放最后加载
+zinit wait lucid for zdharma-continuum/fast-syntax-highlighting
+
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+
+export PATH=$HOME/.local/bin:$PATH
+export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
+
+eval "$(zoxide init zsh)"
+eval "$(starship init zsh)"
+eval "$(direnv hook zsh)"
+
+# fzf 键绑定：Ctrl+R 历史 / Ctrl+T 文件 / Alt+C 目录
+source <(fzf --zsh)
+
+# fzf-tab 行为微调
+zstyle ':completion:*' menu no                            # 关掉原生菜单，交给 fzf-tab
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*:git-checkout:*' sort false          # git checkout 分支按 git 顺序
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
+
+# 通用 preview：目录用 eza，文件用 bat
+zstyle ':fzf-tab:complete:*:*' fzf-preview '
+  if [[ -d $realpath ]]; then
+    eza -1 --color=always $realpath
+  elif [[ -f $realpath ]]; then
+    bat --color=always --style=numbers --line-range=:200 $realpath
+  fi'
+# kill 时显示进程完整命令行
+zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
+  'ps -p $word -o command= 2>/dev/null'
+# 变量补全（$<Tab>）时显示变量值
+zstyle ':fzf-tab:complete:-parameter-:*' fzf-preview 'echo ${(P)word}'
+
+# 让 fzf 默认用 fd（更快、自动尊重 .gitignore）
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+
+# 现代 unix 工具别名（不覆盖原命令，保持脚本兼容）
+alias ll='eza -lah --git --icons'
+alias la='eza -a'
+alias lt='eza --tree --git-ignore --level=3'
+
+# 历史前缀搜索 — 输入前缀后按上下键匹配历史
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
+
+# pnpm 补全（缓存加速，延迟到 compinit 之后再 source）
+if [[ ! -f ~/.zsh_pnpm_completion ]] || [[ $(which pnpm) -nt ~/.zsh_pnpm_completion ]]; then
+  pnpm completion zsh > ~/.zsh_pnpm_completion
+fi
+zinit wait lucid for \
+  id-as'pnpm-completion' \
+  atload'source ~/.zsh_pnpm_completion' \
+  zdharma-continuum/null
+
+# OSC 7: report cwd to terminal (Ghostty new-window inherits directory)
+function osc7-pwd() {
+  emulate -L zsh
+  setopt extendedglob
+  local LC_ALL=C
+  printf '\e]7;file://%s%s\e\\' "${HOST}" "${PWD//(#m)([^@-Za-z&-;=_~])/%${(l:2::0:)$(([##16]#MATCH))}}"
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook chpwd osc7-pwd
+osc7-pwd
