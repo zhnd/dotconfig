@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+# run_onchange_before_install-packages.sh.tmpl
+#
+# 当此脚本（含内联 package 列表）哈希变化时自动重跑。
+# 在 ~ 下文件部署之前执行，确保 .zshrc 引用的工具（starship/zoxide 等）已就位。
+#
+# 支持：macOS（brew + cask）/ Fedora（dnf + 少量手动）
+
+set -euo pipefail
+
+{{- if eq .chezmoi.os "darwin" }}
+# ── macOS ──────────────────────────────────────────────
+if ! command -v brew >/dev/null 2>&1; then
+  echo "🍺 Installing Homebrew..."
+  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+brew bundle --file=/dev/stdin <<'EOF'
+brew "bat"
+brew "bitwarden-cli"
+brew "chezmoi"
+brew "direnv"
+brew "eza"
+brew "fd"
+brew "fnm"
+brew "fzf"
+brew "gh"
+brew "git-delta"
+brew "lazygit"
+brew "neovim"
+brew "pnpm"
+brew "ripgrep"
+brew "starship"
+brew "zellij"
+brew "zoxide"
+cask "ghostty"
+EOF
+
+{{- else if eq .chezmoi.os "linux" }}
+# ── Linux (Fedora) ─────────────────────────────────────
+[[ -f /etc/os-release ]] || { echo "❌ 无 /etc/os-release"; exit 1; }
+. /etc/os-release
+
+if [[ "$ID" != "fedora" && "${ID_LIKE:-}" != *fedora* ]]; then
+  echo "❌ 当前只支持 Fedora；检测到的 distro: $ID"
+  exit 1
+fi
+
+# Fedora 官方源能直接装的
+sudo dnf install -y --skip-unavailable \
+  bat \
+  direnv \
+  eza \
+  fd-find \
+  fzf \
+  gh \
+  git-delta \
+  lazygit \
+  neovim \
+  ripgrep \
+  starship \
+  zoxide
+
+# 官方源没有的，用脚本/二进制方式装
+if ! command -v chezmoi >/dev/null 2>&1; then
+  sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
+fi
+if ! command -v fnm >/dev/null 2>&1; then
+  curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
+fi
+if ! command -v bw >/dev/null 2>&1; then
+  echo "ℹ️  bitwarden-cli 需手动装：https://bitwarden.com/download/ 下 zip 解压到 /usr/local/bin"
+fi
+if ! command -v zellij >/dev/null 2>&1; then
+  echo "ℹ️  zellij 需手动装：https://github.com/zellij-org/zellij/releases 下二进制"
+fi
+if ! command -v pnpm >/dev/null 2>&1; then
+  corepack enable 2>/dev/null && corepack prepare pnpm@latest --activate
+fi
+{{- end }}
+
+echo "✅ 所有 package 已就绪"
