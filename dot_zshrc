@@ -53,10 +53,6 @@ proxy_on > /dev/null
 
 export NEXT_PUBLIC_CTC_EDITOR=vscode
 
-alias mrt="git push origin \$(git rev-parse --abbrev-ref HEAD):mr/test/\$(git rev-parse --abbrev-ref HEAD)"
-alias mrm="git push origin \$(git rev-parse --abbrev-ref HEAD):mr/master/\$(git rev-parse --abbrev-ref HEAD)"
-alias mrp="git push origin \$(git rev-parse --abbrev-ref HEAD):mr/prerelease/\$(git rev-parse --abbrev-ref HEAD)"
-
 # zellij: 按"当前目录名"作为 session 名，已存在则 attach 回去
 zj() {
   local name="${1:-$(basename "$PWD")}"
@@ -166,3 +162,7 @@ function osc7-pwd() {
 autoload -Uz add-zsh-hook
 add-zsh-hook chpwd osc7-pwd
 osc7-pwd
+
+# 机器特定配置（work / personal），按 chezmoi profile 部署
+[[ -f ~/.zshrc.work ]] && source ~/.zshrc.work
+[[ -f ~/.zshrc.personal ]] && source ~/.zshrc.personal

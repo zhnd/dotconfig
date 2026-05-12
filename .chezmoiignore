@@ -1,2 +1,8 @@
 README.md
 LICENSE
+{{- if ne .profile "work" }}
+.zshrc.work
+{{- end }}
+{{- if ne .profile "personal" }}
+.zshrc.personal
+{{- end }}
