@@ -9,7 +9,3 @@ export PATH=$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cm
 
 # Flutter pub cache
 export PATH="$PATH:$HOME/.pub-cache/bin"
-
-# mise (多语言版本管理：Node/Python/Go/Ruby 等)
-# 官方推荐 eager activate，进入项目目录读 .tool-versions / mise.toml 时无延迟
-command -v mise >/dev/null 2>&1 && eval "$(mise activate zsh)"
