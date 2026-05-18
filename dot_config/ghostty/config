@@ -4,5 +4,3 @@ macos-titlebar-style = tabs
 auto-update-channel = stable
 
 shell-integration-features = ssh-env
-
-command = "/bin/zsh -lc 'zellij attach -c main'"
